@@ -37,7 +37,7 @@ function line_test() {
 		for(lti = 0; lti < 5; lti++) {
 			plin[lti].num = -3;
 		}
-		alert("You WIN!!!");
+//		alert("You WIN!!!");
 		stop = 1;
 //		repaintwin()
 		return 1;
@@ -49,7 +49,7 @@ function line_test() {
 			plin[lti].num = -4;
 		}
 		stop = 1;
-		alert("I WIN!!!");
+//		alert("I WIN!!!");
 //		repaintwin()
 		return 2;
 	} // add one point, comp win
