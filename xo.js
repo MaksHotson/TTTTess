@@ -31,54 +31,47 @@ var layer = new Konva.Layer();
 var image_xz = new Image();
 image_xz.onload = function() {
   var arrow_xz = new Konva.Image({
-//    x: 200,
 	x: b/2+a*4+(b+4*a)*4+b,
-//    y: 50,
     y: b/2+a,
     image: image_xz,
-	fill: '#d0d0d0',
+//	fill: '#d0d0d0',
     width: b,
     height: b
   });
   layer.add(arrow_xz);
   stage.add(layer);
 };
-//image_xz.src = 'horizontal-arrows.jpg'
-image_xz.src = 'horizontal-arrows.png'
+image_xz.src = 'xz.png'
 
 var image_yt = new Image();
 image_yt.onload = function() {
   var arrow_yt = new Konva.Image({
-//    x: 200,
 	x: b/2+a*4+(b+4*a)*4+b,
-//    y: 50,
     y: b/2+a+b+4*a,
     image: image_yt,
-	fill: '#d0d0d0',
+//	fill: '#d0d0d0',
     width: b,
     height: b
   });
   layer.add(arrow_yt);
   stage.add(layer);
 };
-image_yt.src = 'vertical-1.png'
+image_yt.src = 'yt.png'
 
 var image_u = new Image();
 image_u.onload = function() {
   var arrow_u = new Konva.Image({
-//    x: 200,
 	x: b/2+a*4+(b+4*a)*4+b,
-//    y: 50,
     y: b/2+a+b+4*a+b+4*a,
     image: image_u,
-	fill: '#d0d0d0',
+//	fill: '#d0d0d0',
     width: b,
     height: b
   });
   layer.add(arrow_u);
   stage.add(layer);
 };
-image_u.src = 'reload.png'
+image_u.src = 'undo.png'
 
 ///*
 for(i = 0; i < 5; i++)

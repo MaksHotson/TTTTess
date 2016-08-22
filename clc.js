@@ -1,3 +1,9 @@
+
+var arr = [];
+var d;
+//d = arr.pop();
+//alert(d.y + ', ' + d.x + ', ' + (d.y-d.x));
+
 function field() {}
 
 var plin = new Array(5);
@@ -254,6 +260,8 @@ function repaint(t) {
 			newWin.document.write("<table border = 1>");
 		}
 		t.num = -1;
+		arr.push({hx:t.tx, hy:t.ty, hz:t.tz, ht:t.tt});
+		arr[arr.length-1].y = 9;
 		colr = '#007733';
 		t.setFill(colr);
 		diag_0();
@@ -278,6 +286,10 @@ function repaint(t) {
 //		alert(ss);
 //		tess[t.tx+1][t.ty][t.tz][t.tt].num = -2;
 		tess[ii_i][jj_j][kk_k][ll_l].num = -2;
+		arr[arr.length-1].cx = tess[ii_i][jj_j][kk_k][ll_l].tx;
+		arr[arr.length-1].cy = tess[ii_i][jj_j][kk_k][ll_l].ty;
+		arr[arr.length-1].cz = tess[ii_i][jj_j][kk_k][ll_l].tz;
+		arr[arr.length-1].ct = tess[ii_i][jj_j][kk_k][ll_l].tt;
 		colr = '#770033';
 //		tess[t.tx+1][t.ty][t.tz][t.tt].setFill(colr);
 		tess[ii_i][jj_j][kk_k][ll_l].setFill(colr);
