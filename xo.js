@@ -84,7 +84,7 @@ image_u.src = 'undo.png'
 
 function xzproc() {	alert('xz');	}
 function ytproc() {	alert('yt');	}
-function undoproc() {	alert('undo');	}
+// function undoproc() {	alert('undo');	}
 
 ///*
 for(i = 0; i < 5; i++)

@@ -1,8 +1,6 @@
 
 var arr = [];
 var d;
-//d = arr.pop();
-//alert(d.y + ', ' + d.x + ', ' + (d.y-d.x));
 
 function field() {}
 
@@ -247,6 +245,18 @@ function repaintwin() {
 //						tess[ri][rj][rk][rl].setFill(colr);
 					}
 		layer.draw();  
+}
+
+function undoproc() {
+//	alert('undo');
+	d = arr.pop();
+//	alert(d.y + ', ' + d.x + ', ' + (d.y-d.x));
+	tess[d.hx][d.hy][d.hz][d.ht].num = 0;
+	tess[d.cx][d.cy][d.cz][d.ct].num = 0;
+	colr = '#d0d0d0';
+	tess[d.hx][d.hy][d.hz][d.ht].setFill(colr);
+	tess[d.cx][d.cy][d.cz][d.ct].setFill(colr);
+	layer.draw();  
 }
 
 function repaint(t) {
