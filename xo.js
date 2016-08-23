@@ -40,6 +40,7 @@ image_xz.onload = function() {
   });
   arrow_xz.on('mouseup touchend', function() {
 	xzproc();
+	repaintwin();
   })
   layer.add(arrow_xz);
   stage.add(layer);
@@ -58,6 +59,7 @@ image_yt.onload = function() {
   });
   arrow_yt.on('mouseup touchend', function() {
 	ytproc();
+	repaintwin();
   })
   layer.add(arrow_yt);
   stage.add(layer);
@@ -83,7 +85,7 @@ image_u.onload = function() {
 image_u.src = 'undo.png'
 
 //function xzproc() {	alert('xz');	}
-function ytproc() {	alert('yt');	}
+//function ytproc() {	alert('yt');	}
 // function undoproc() {	alert('undo');	}
 
 ///*

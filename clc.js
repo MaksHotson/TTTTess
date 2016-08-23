@@ -1,6 +1,8 @@
 
 var arr = [];
 var d;
+var xz_state = 0;
+var yt_state = 0;
 
 function field() {}
 
@@ -250,6 +252,7 @@ function repaintwin() {
 }
 
 function xzproc() {
+	xz_state = 1 - xz_state;
 	for(var rrk = 0; rrk < 5; rrk++)
 		for(var rrl = 0; rrl < 5; rrl++)
 			for(var rri = 0; rri < 5; rri++)
@@ -258,18 +261,38 @@ function xzproc() {
 					tess[rri][rrj][rrk][rrl].num = tess[rrj][rri][rrk][rrl].num;
 					tess[rrj][rri][rrk][rrl].num = tmp_coord;
 				}	
-	repaintwin();
+//	repaintwin();
+}
+
+function ytproc() {
+	yt_state = 1 - yt_state;
+	for(var rri = 0; rri < 5; rri++)
+		for(var rrj = 0; rrj < 5; rrj++)
+			for(var rrk = 0; rrk < 5; rrk++)
+				for(var rrl = 0; rrl < rrk; rrl++) {
+					tmp_coord = tess[rri][rrj][rrk][rrl].num;
+					tess[rri][rrj][rrk][rrl].num = tess[rri][rrj][rrl][rrk].num;
+					tess[rri][rrj][rrl][rrk].num = tmp_coord;
+				}	
+//	repaintwin();
 }
 
 function undoproc() {
 //	alert('undo');
 	if((arr.length > 0) & (stop==0)){
+		var yt_st = yt_state;
+		var xz_st = xz_state;
+		if(yt_st==1) ytproc();
+		if(xz_st==1) xzproc();
 		d = arr.pop();
 		tess[d.hx][d.hy][d.hz][d.ht].num = 0;
 		tess[d.cx][d.cy][d.cz][d.ct].num = 0;
 		colr = '#d0d0d0';
 		tess[d.hx][d.hy][d.hz][d.ht].setFill(colr);
 		tess[d.cx][d.cy][d.cz][d.ct].setFill(colr);
+		if(xz_st==1) xzproc();
+		if(yt_st==1) ytproc();
+		repaintwin();
 //		if(stop==1) {
 //			stop=0;
 //			for(var rri = 0; rri < 5; rri++)
