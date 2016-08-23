@@ -230,6 +230,7 @@ var i = 0, j = 0, k = 0, l = 0, m = 0;
 
 var ss = '';
 var ii_i = 0, jj_j = 0, kk_k = 0, ll_l = 0;
+var tmp_coord = 0;
 
 function repaintwin() {
 		for(var rri = 0; rri < 5; rri++)
@@ -246,6 +247,18 @@ function repaintwin() {
 //						tess[ri][rj][rk][rl].setFill(colr);
 					}
 		layer.draw();  
+}
+
+function xzproc() {
+	for(var rrk = 0; rrk < 5; rrk++)
+		for(var rrl = 0; rrl < 5; rrl++)
+			for(var rri = 0; rri < 5; rri++)
+				for(var rrj = 0; rrj < rri; rrj++) {
+					tmp_coord = tess[rri][rrj][rrk][rrl].num;
+					tess[rri][rrj][rrk][rrl].num = tess[rrj][rri][rrk][rrl].num;
+					tess[rrj][rri][rrk][rrl].num = tmp_coord;
+				}	
+	repaintwin();
 }
 
 function undoproc() {

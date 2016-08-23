@@ -82,7 +82,7 @@ image_u.onload = function() {
 };
 image_u.src = 'undo.png'
 
-function xzproc() {	alert('xz');	}
+//function xzproc() {	alert('xz');	}
 function ytproc() {	alert('yt');	}
 // function undoproc() {	alert('undo');	}
 
