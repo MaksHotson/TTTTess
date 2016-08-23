@@ -236,6 +236,7 @@ function repaintwin() {
 			for(var rrj = 0; rrj < 5; rrj++)
 				for(var rrk = 0; rrk < 5; rrk++)
 					for(var rrl = 0; rrl < 5; rrl++) {
+						colr = '#d0d0d0'; tess[rri][rrj][rrk][rrl].setFill(colr);
 						switch (tess[rri][rrj][rrk][rrl].num) {
 							case -1: colr = '#007733'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
 							case -2: colr = '#770033'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
@@ -249,14 +250,30 @@ function repaintwin() {
 
 function undoproc() {
 //	alert('undo');
-	d = arr.pop();
-//	alert(d.y + ', ' + d.x + ', ' + (d.y-d.x));
-	tess[d.hx][d.hy][d.hz][d.ht].num = 0;
-	tess[d.cx][d.cy][d.cz][d.ct].num = 0;
-	colr = '#d0d0d0';
-	tess[d.hx][d.hy][d.hz][d.ht].setFill(colr);
-	tess[d.cx][d.cy][d.cz][d.ct].setFill(colr);
-	layer.draw();  
+	if((arr.length > 0) & (stop==0)){
+		d = arr.pop();
+		tess[d.hx][d.hy][d.hz][d.ht].num = 0;
+		tess[d.cx][d.cy][d.cz][d.ct].num = 0;
+		colr = '#d0d0d0';
+		tess[d.hx][d.hy][d.hz][d.ht].setFill(colr);
+		tess[d.cx][d.cy][d.cz][d.ct].setFill(colr);
+//		if(stop==1) {
+//			stop=0;
+//			for(var rri = 0; rri < 5; rri++)
+//				for(var rrj = 0; rrj < 5; rrj++)
+//					for(var rrk = 0; rrk < 5; rrk++)
+//						for(var rrl = 0; rrl < 5; rrl++) {
+//							switch (tess[rri][rrj][rrk][rrl].num) {
+////								case -1: colr = '#007733'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
+////								case -2: colr = '#770033'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
+//								case -3: colr = '#00FF77'; tess[rri][rrj][rrk][rrl].setFill(colr); tess[rri][rrj][rrk][rrl].num = -1; break;
+//								case -4: colr = '#FF0077'; tess[rri][rrj][rrk][rrl].setFill(colr); tess[rri][rrj][rrk][rrl].num = -1; break;
+//							}
+////							tess[ri][rj][rk][rl].setFill(colr);
+//						}
+//		}
+		layer.draw();  
+	}
 }
 
 function repaint(t) {
