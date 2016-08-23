@@ -38,6 +38,9 @@ image_xz.onload = function() {
     width: b,
     height: b
   });
+  arrow_xz.on('mouseup touchend', function() {
+	xzproc();
+  })
   layer.add(arrow_xz);
   stage.add(layer);
 };
@@ -53,6 +56,9 @@ image_yt.onload = function() {
     width: b,
     height: b
   });
+  arrow_yt.on('mouseup touchend', function() {
+	ytproc();
+  })
   layer.add(arrow_yt);
   stage.add(layer);
 };
@@ -68,19 +74,17 @@ image_u.onload = function() {
     width: b,
     height: b
   });
+  arrow_u.on('mouseup touchend', function() {
+	undoproc();
+  })
   layer.add(arrow_u);
   stage.add(layer);
 };
 image_u.src = 'undo.png'
 
-//arrow_u.on('mouseup touchend', function(evt) {
-//	undo_proc(evt.target);
-arrow_u.on('mouseup touchend', function() {
-	undo_proc();
-})
-
-//function undo_proc(r) {	alert(r.width);	}
-function undo_proc() {	alert('undo');	}
+function xzproc() {	alert('xz');	}
+function ytproc() {	alert('yt');	}
+function undoproc() {	alert('undo');	}
 
 ///*
 for(i = 0; i < 5; i++)
