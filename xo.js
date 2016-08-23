@@ -73,6 +73,15 @@ image_u.onload = function() {
 };
 image_u.src = 'undo.png'
 
+//arrow_u.on('mouseup touchend', function(evt) {
+//	undo_proc(evt.target);
+arrow_u.on('mouseup touchend', function() {
+	undo_proc();
+})
+
+//function undo_proc(r) {	alert(r.width);	}
+function undo_proc() {	alert('undo');	}
+
 ///*
 for(i = 0; i < 5; i++)
 	for(j = 0; j < 5; j++)
