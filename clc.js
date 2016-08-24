@@ -233,22 +233,25 @@ var i = 0, j = 0, k = 0, l = 0, m = 0;
 var ss = '';
 var ii_i = 0, jj_j = 0, kk_k = 0, ll_l = 0;
 var tmp_coord = 0;
+var t_p, t_gp, t_g;
 
 function repaintwin() {
-		for(var rri = 0; rri < 5; rri++)
-			for(var rrj = 0; rrj < 5; rrj++)
-				for(var rrk = 0; rrk < 5; rrk++)
-					for(var rrl = 0; rrl < 5; rrl++) {
-						colr = '#d0d0d0'; tess[rri][rrj][rrk][rrl].setFill(colr);
-						switch (tess[rri][rrj][rrk][rrl].num) {
-							case -1: colr = '#007733'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
-							case -2: colr = '#770033'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
-							case -3: colr = '#00FF77'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
-							case -4: colr = '#FF0077'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
-						}
-//						tess[ri][rj][rk][rl].setFill(colr);
+	for(var rri = 0; rri < 5; rri++)
+		for(var rrj = 0; rrj < 5; rrj++)
+			for(var rrk = 0; rrk < 5; rrk++)
+				for(var rrl = 0; rrl < 5; rrl++) {
+					t_p = tess[rri][rrj][rrk][rrl];
+					t_gp = tess[t_p.g.x][t_p.g.y][t_p.g.z][t_p.g.t];
+					colr = '#d0d0d0'; t_gp.setFill(colr);
+					switch (t_p.num) {
+						case -1: colr = '#007733'; break;
+						case -2: colr = '#770033'; break;
+						case -3: colr = '#00FF77'; break;
+						case -4: colr = '#FF0077'; break;
 					}
-		layer.draw();  
+					t_gp.setFill(colr);
+				}
+	layer.draw();  
 }
 
 function xzproc() {
@@ -257,9 +260,12 @@ function xzproc() {
 		for(var rrl = 0; rrl < 5; rrl++)
 			for(var rri = 0; rri < 5; rri++)
 				for(var rrj = 0; rrj < rri; rrj++) {
-					tmp_coord = tess[rri][rrj][rrk][rrl].num;
-					tess[rri][rrj][rrk][rrl].num = tess[rrj][rri][rrk][rrl].num;
-					tess[rrj][rri][rrk][rrl].num = tmp_coord;
+//					tmp_coord = tess[rri][rrj][rrk][rrl].num;
+//					tess[rri][rrj][rrk][rrl].num = tess[rrj][rri][rrk][rrl].num;
+//					tess[rrj][rri][rrk][rrl].num = tmp_coord;
+					t_g = tess[rri][rrj][rrk][rrl].g;
+					tess[rri][rrj][rrk][rrl].g = tess[rrj][rri][rrk][rrl].g;
+					tess[rrj][rri][rrk][rrl].g = t_g;
 				}	
 //	repaintwin();
 }
@@ -270,9 +276,12 @@ function ytproc() {
 		for(var rrj = 0; rrj < 5; rrj++)
 			for(var rrk = 0; rrk < 5; rrk++)
 				for(var rrl = 0; rrl < rrk; rrl++) {
-					tmp_coord = tess[rri][rrj][rrk][rrl].num;
-					tess[rri][rrj][rrk][rrl].num = tess[rri][rrj][rrl][rrk].num;
-					tess[rri][rrj][rrl][rrk].num = tmp_coord;
+//					tmp_coord = tess[rri][rrj][rrk][rrl].num;
+//					tess[rri][rrj][rrk][rrl].num = tess[rri][rrj][rrl][rrk].num;
+//					tess[rri][rrj][rrl][rrk].num = tmp_coord;
+					t_g = tess[rri][rrj][rrk][rrl].g;
+					tess[rri][rrj][rrk][rrl].g = tess[rri][rrj][rrl][rrk].g;
+					tess[rri][rrj][rrl][rrk].g = t_g;
 				}	
 //	repaintwin();
 }
@@ -280,18 +289,18 @@ function ytproc() {
 function undoproc() {
 //	alert('undo');
 	if((arr.length > 0) & (stop==0)){
-		var yt_st = yt_state;
-		var xz_st = xz_state;
-		if(yt_st==1) ytproc();
-		if(xz_st==1) xzproc();
+//		var yt_st = yt_state;
+//		var xz_st = xz_state;
+//		if(yt_st==1) ytproc();
+//		if(xz_st==1) xzproc();
 		d = arr.pop();
 		tess[d.hx][d.hy][d.hz][d.ht].num = 0;
 		tess[d.cx][d.cy][d.cz][d.ct].num = 0;
 		colr = '#d0d0d0';
 		tess[d.hx][d.hy][d.hz][d.ht].setFill(colr);
 		tess[d.cx][d.cy][d.cz][d.ct].setFill(colr);
-		if(xz_st==1) xzproc();
-		if(yt_st==1) ytproc();
+//		if(xz_st==1) xzproc();
+//		if(yt_st==1) ytproc();
 		repaintwin();
 //		if(stop==1) {
 //			stop=0;
@@ -326,7 +335,8 @@ function repaint(t) {
 		arr.push({hx:t.tx, hy:t.ty, hz:t.tz, ht:t.tt});
 		arr[arr.length-1].y = 9;
 		colr = '#007733';
-		t.setFill(colr);
+//		t.setFill(colr);
+		tess[t.g.x][t.g.y][t.g.z][t.g.t].setFill(colr);
 		diag_0();
 		diag_1();
 		diag_2();
@@ -354,8 +364,9 @@ function repaint(t) {
 		arr[arr.length-1].cz = tess[ii_i][jj_j][kk_k][ll_l].tz;
 		arr[arr.length-1].ct = tess[ii_i][jj_j][kk_k][ll_l].tt;
 		colr = '#770033';
-//		tess[t.tx+1][t.ty][t.tz][t.tt].setFill(colr);
-		tess[ii_i][jj_j][kk_k][ll_l].setFill(colr);
+//		tess[ii_i][jj_j][kk_k][ll_l].setFill(colr);
+		t_p = tess[ii_i][jj_j][kk_k][ll_l];
+		tess[t_p.g.x][t_p.g.y][t_p.g.z][t_p.g.t].setFill(colr);
 		for(ri = 0; ri < 5; ri++)
 			for(rj = 0; rj < 5; rj++)
 				for(rk = 0; rk < 5; rk++)

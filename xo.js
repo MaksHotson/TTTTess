@@ -105,6 +105,7 @@ for(i = 0; i < 5; i++)
 				tess[i][j][k][l].ty = j;
 				tess[i][j][k][l].tz = k;
 				tess[i][j][k][l].tt = l;
+				tess[i][j][k][l].g = {x:i, y:j, z:k, t:l};
 				layer.add(tess[i][j][k][l]);
 }
 stage.add(layer);
