@@ -331,12 +331,13 @@ function repaint(t) {
 			newWin = window.open();
 			newWin.document.write("<table border = 1>");
 		}
-		t.num = -1;
+//		t.num = -1;
+		tess[t.g.x][t.g.y][t.g.z][t.g.t].num = -1;
 		arr.push({hx:t.tx, hy:t.ty, hz:t.tz, ht:t.tt});
-		arr[arr.length-1].y = 9;
+//		arr.push({hx:t.g.x, hy:t.g.y, hz:t.g.z, ht:t.g.t});
 		colr = '#007733';
-//		t.setFill(colr);
-		tess[t.g.x][t.g.y][t.g.z][t.g.t].setFill(colr);
+		t.setFill(colr);
+//		tess[t.g.x][t.g.y][t.g.z][t.g.t].setFill(colr);
 		diag_0();
 		diag_1();
 		diag_2();
@@ -357,15 +358,16 @@ function repaint(t) {
 		}
 //		newWin.document.write("<p>" + ss + "</p>");
 //		alert(ss);
-//		tess[t.tx+1][t.ty][t.tz][t.tt].num = -2;
-		tess[ii_i][jj_j][kk_k][ll_l].num = -2;
-		arr[arr.length-1].cx = tess[ii_i][jj_j][kk_k][ll_l].tx;
-		arr[arr.length-1].cy = tess[ii_i][jj_j][kk_k][ll_l].ty;
-		arr[arr.length-1].cz = tess[ii_i][jj_j][kk_k][ll_l].tz;
-		arr[arr.length-1].ct = tess[ii_i][jj_j][kk_k][ll_l].tt;
+		t_p = tess[ii_i][jj_j][kk_k][ll_l];
+//		tess[ii_i][jj_j][kk_k][ll_l].num = -2;
+		t_gp = tess[t_p.g.x][t_p.g.y][t_p.g.z][t_p.g.t];
+		t_gp.num = -2;
+		arr[arr.length-1].cx = t_gp.tx;
+		arr[arr.length-1].cy = t_gp.ty;
+		arr[arr.length-1].cz = t_gp.tz;
+		arr[arr.length-1].ct = t_gp.tt;
 		colr = '#770033';
 //		tess[ii_i][jj_j][kk_k][ll_l].setFill(colr);
-		t_p = tess[ii_i][jj_j][kk_k][ll_l];
 		tess[t_p.g.x][t_p.g.y][t_p.g.z][t_p.g.t].setFill(colr);
 		for(ri = 0; ri < 5; ri++)
 			for(rj = 0; rj < 5; rj++)
