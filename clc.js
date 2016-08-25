@@ -22,6 +22,12 @@ function cube_line_set() {
 	for(var lsi = 0; lsi < 5; lsi++) {
 		tess[plin[lsi].x][plin[lsi].y][plin[lsi].z][plin[lsi].t].num = plin[lsi].num;
 	}
+	if(lineresult == 2) {
+		arr[arr.length-1].cx = plin[last_c].x;
+		arr[arr.length-1].cy = plin[last_c].y;
+		arr[arr.length-1].cz = plin[last_c].z;
+		arr[arr.length-1].ct = plin[last_c].t;
+	}
 }
 
 function cube_line_get() {
@@ -30,6 +36,8 @@ function cube_line_get() {
 		plin[lgi].num0 = tess[plin[lgi].x][plin[lgi].y][plin[lgi].z][plin[lgi].t].num;
 	}
 }
+
+var last_c;
 
 function line_test() {
 	var h, c, lti;
@@ -43,20 +51,21 @@ function line_test() {
 		for(lti = 0; lti < 5; lti++) {
 			plin[lti].num = -3;
 		}
-//		alert("You WIN!!!");
 		stop = 1;
-//		repaintwin()
+		arr[arr.length-1].cx = arr[arr.length-1].hx;
+		arr[arr.length-1].cy = arr[arr.length-1].hy;
+		arr[arr.length-1].cz = arr[arr.length-1].hz;
+		arr[arr.length-1].ct = arr[arr.length-1].ht;
 		return 1;
 	}// human win
 	if((h*c) != 0)
 		return 0; // do nothing
 	if(c == 4) {
 		for(lti = 0; lti < 5; lti++) {
+			if(plin[lti].num != -2) last_c = lti;
 			plin[lti].num = -4;
 		}
 		stop = 1;
-//		alert("I WIN!!!");
-//		repaintwin()
 		return 2;
 	} // add one point, comp win
 	for(lti = 0; lti < 5; lti++) {
@@ -279,29 +288,24 @@ function ytproc() {
 }
 
 function undoproc() {
-	if((arr.length > 0) & (stop==0)){
+//	if((arr.length > 0) & (stop==0)){
+	if(arr.length > 0){
 		d = arr.pop();
 		tess[d.hx][d.hy][d.hz][d.ht].num = 0;
 		tess[d.cx][d.cy][d.cz][d.ct].num = 0;
-		colr = '#d0d0d0';
-		tess[d.hx][d.hy][d.hz][d.ht].setFill(colr);
-		tess[d.cx][d.cy][d.cz][d.ct].setFill(colr);
+		if(stop==1) {
+			stop=0;
+			for(var rri = 0; rri < 5; rri++)
+				for(var rrj = 0; rrj < 5; rrj++)
+					for(var rrk = 0; rrk < 5; rrk++)
+						for(var rrl = 0; rrl < 5; rrl++) {
+							switch (tess[rri][rrj][rrk][rrl].num) {
+								case -3: tess[rri][rrj][rrk][rrl].num = -1; break;
+								case -4: tess[rri][rrj][rrk][rrl].num = -2; break;
+							}
+						}
+		}
 		repaintwin();
-//		if(stop==1) {
-//			stop=0;
-//			for(var rri = 0; rri < 5; rri++)
-//				for(var rrj = 0; rrj < 5; rrj++)
-//					for(var rrk = 0; rrk < 5; rrk++)
-//						for(var rrl = 0; rrl < 5; rrl++) {
-//							switch (tess[rri][rrj][rrk][rrl].num) {
-////								case -1: colr = '#007733'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
-////								case -2: colr = '#770033'; tess[rri][rrj][rrk][rrl].setFill(colr); break;
-//								case -3: colr = '#00FF77'; tess[rri][rrj][rrk][rrl].setFill(colr); tess[rri][rrj][rrk][rrl].num = -1; break;
-//								case -4: colr = '#FF0077'; tess[rri][rrj][rrk][rrl].setFill(colr); tess[rri][rrj][rrk][rrl].num = -1; break;
-//							}
-////							tess[ri][rj][rk][rl].setFill(colr);
-//						}
-//		}
 		layer.draw();  
 	}
 }
@@ -323,6 +327,9 @@ function repaint(t) {
 		diag_2();
 		diag_3();
 //		ss = '';
+		if(stop==1) {
+			return;	
+		}
         ii_i = 0; jj_j = 0; kk_k = 0; ll_l = 0;
 		for(var ri = 0; ri < 5; ri++)
 			for(var rj = 0; rj < 5; rj++)
