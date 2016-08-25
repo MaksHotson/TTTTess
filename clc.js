@@ -260,14 +260,10 @@ function xzproc() {
 		for(var rrl = 0; rrl < 5; rrl++)
 			for(var rri = 0; rri < 5; rri++)
 				for(var rrj = 0; rrj < rri; rrj++) {
-//					tmp_coord = tess[rri][rrj][rrk][rrl].num;
-//					tess[rri][rrj][rrk][rrl].num = tess[rrj][rri][rrk][rrl].num;
-//					tess[rrj][rri][rrk][rrl].num = tmp_coord;
 					t_g = tess[rri][rrj][rrk][rrl].g;
 					tess[rri][rrj][rrk][rrl].g = tess[rrj][rri][rrk][rrl].g;
 					tess[rrj][rri][rrk][rrl].g = t_g;
 				}	
-//	repaintwin();
 }
 
 function ytproc() {
@@ -276,31 +272,20 @@ function ytproc() {
 		for(var rrj = 0; rrj < 5; rrj++)
 			for(var rrk = 0; rrk < 5; rrk++)
 				for(var rrl = 0; rrl < rrk; rrl++) {
-//					tmp_coord = tess[rri][rrj][rrk][rrl].num;
-//					tess[rri][rrj][rrk][rrl].num = tess[rri][rrj][rrl][rrk].num;
-//					tess[rri][rrj][rrl][rrk].num = tmp_coord;
 					t_g = tess[rri][rrj][rrk][rrl].g;
 					tess[rri][rrj][rrk][rrl].g = tess[rri][rrj][rrl][rrk].g;
 					tess[rri][rrj][rrl][rrk].g = t_g;
 				}	
-//	repaintwin();
 }
 
 function undoproc() {
-//	alert('undo');
 	if((arr.length > 0) & (stop==0)){
-//		var yt_st = yt_state;
-//		var xz_st = xz_state;
-//		if(yt_st==1) ytproc();
-//		if(xz_st==1) xzproc();
 		d = arr.pop();
 		tess[d.hx][d.hy][d.hz][d.ht].num = 0;
 		tess[d.cx][d.cy][d.cz][d.ct].num = 0;
 		colr = '#d0d0d0';
 		tess[d.hx][d.hy][d.hz][d.ht].setFill(colr);
 		tess[d.cx][d.cy][d.cz][d.ct].setFill(colr);
-//		if(xz_st==1) xzproc();
-//		if(yt_st==1) ytproc();
 		repaintwin();
 //		if(stop==1) {
 //			stop=0;
@@ -326,18 +311,13 @@ function repaint(t) {
 		return;	
 	}
 	debug_win = 0;
-	if(t.num >= 0) {
+	if(tess[t.g.x][t.g.y][t.g.z][t.g.t].num >= 0) {
 		if(debug_win == 1) {
 			newWin = window.open();
 			newWin.document.write("<table border = 1>");
 		}
-//		t.num = -1;
 		tess[t.g.x][t.g.y][t.g.z][t.g.t].num = -1;
-		arr.push({hx:t.tx, hy:t.ty, hz:t.tz, ht:t.tt});
-//		arr.push({hx:t.g.x, hy:t.g.y, hz:t.g.z, ht:t.g.t});
-		colr = '#007733';
-		t.setFill(colr);
-//		tess[t.g.x][t.g.y][t.g.z][t.g.t].setFill(colr);
+		arr.push({hx:t.g.x, hy:t.g.y, hz:t.g.z, ht:t.g.t});
 		diag_0();
 		diag_1();
 		diag_2();
@@ -359,16 +339,12 @@ function repaint(t) {
 //		newWin.document.write("<p>" + ss + "</p>");
 //		alert(ss);
 		t_p = tess[ii_i][jj_j][kk_k][ll_l];
-//		tess[ii_i][jj_j][kk_k][ll_l].num = -2;
-		t_gp = tess[t_p.g.x][t_p.g.y][t_p.g.z][t_p.g.t];
-		t_gp.num = -2;
-		arr[arr.length-1].cx = t_gp.tx;
-		arr[arr.length-1].cy = t_gp.ty;
-		arr[arr.length-1].cz = t_gp.tz;
-		arr[arr.length-1].ct = t_gp.tt;
-		colr = '#770033';
-//		tess[ii_i][jj_j][kk_k][ll_l].setFill(colr);
-		tess[t_p.g.x][t_p.g.y][t_p.g.z][t_p.g.t].setFill(colr);
+		t_p.num = -2;
+		arr[arr.length-1].cx = t_p.tx;
+		arr[arr.length-1].cy = t_p.ty;
+		arr[arr.length-1].cz = t_p.tz;
+		arr[arr.length-1].ct = t_p.tt;
+		repaintwin();
 		for(ri = 0; ri < 5; ri++)
 			for(rj = 0; rj < 5; rj++)
 				for(rk = 0; rk < 5; rk++)
