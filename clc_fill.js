@@ -332,7 +332,8 @@ function repaint(t) {
 		diag_1();
 		diag_2();
 		diag_3();
-//		redraw_text();
+		redraw_text();
+		if(human_ena*comp_ena == 0) stop = 1;
 //		ss = '';
 		if(stop==1) {
 			return;	
